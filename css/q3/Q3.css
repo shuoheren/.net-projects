@@ -1,0 +1,77 @@
+﻿.frame {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100vh;
+}
+
+
+nav {
+    display: flex;
+    align-items:center;
+    justify-content: flex-end;
+    background-image: url('https://th.bing.com/th/id/OIP.3spMH1ZDCJJROFHsbBOUzAHaDJ?pid=ImgDet&rs=1');
+    background-repeat: repeat-x;
+    background-attachment:fixed;
+    height: 200px;
+    width: 100%;
+}
+
+
+
+nav button {
+    margin-right: 50px;
+    color: aliceblue;
+    background-color: orange;
+    width: 100px;
+    height: 50px;
+}
+
+
+.content {
+    flex-grow: 1;
+    background-color: lightgray;
+    padding: 30px 100px;
+    position: relative;
+}
+
+
+.contain-card{
+    display: flex;
+    align-content:center;
+    justify-content:center;
+}
+
+.card {
+    float: left;
+    width: 500px;
+    height: 500px;
+    margin-right: 100px;
+    background: white;
+}
+
+.page {
+    display: flex;
+    align-content: end;
+    list-style-type: none;
+    margin: 2px;
+    position: absolute;
+    bottom: 20px;
+}
+
+    .page li {
+        margin: 2px;
+    }
+
+    .page button{
+        background-color: cornflowerblue;
+        color:azure;
+    }
+    .page button:hover {
+        background-color: orange;
+        color: azure;
+    }
+
