@@ -1,0 +1,99 @@
+﻿@model ApplicationCore.Models.MovieDetailsResponseModel
+
+@{
+    ViewData["Title"] = "Movie Details Page";
+}
+
+<div class="container">
+    <div class="row" style="background-image: url(@Model.BackdropUrl)">
+        <div class="col">
+            @*1 of 3*@
+            <img src="@Model.PosterUrl" width="300"/>
+        </div>
+        <div class="col-6">
+            @*2 of 3*@
+            <h1 style="color:white">@Model.Title</h1>
+            <div style="font-size:smaller; color:lightgray">@Model.Tagline</div>
+            <br />
+            <div style="font-size:medium; color:lightgray">
+                @Model.RunTime m | @Model.ReleaseDate.Value.Year
+                @foreach (var genre in Model.Genres)
+                {
+                    <span class="badge badge-pill badge-dark">@genre.Name</span>
+                }
+            </div>
+            <br />
+            <div>
+                <span class="badge badge-success" style="font-size:medium;">@Model.Rating?.ToString("0.00")</span>
+            </div>
+            <br />
+            <div style="font-size:medium; color:white">
+                @Model.Overview
+            </div>
+            <br />
+        </div>
+        <div class="col">
+            @*3 of 3*@
+            <br />
+            <br />
+            <ul class="list-group-buttons">
+                <li class="list-group-items">
+                    @*<button type="button" class="btn btn-outline-light btn-lg btn-block">REVIEW</button>
+        <button type="button" class="btn btn-light btn-lg btn-block">BUY $@Model.Price</button>*@
+                    <form asp-controller="User" asp-action="Purchase" asp-route-movieId="@Model.Id" method="post">
+                        <button type="submit" class="btn btn-outline-secondary">BUY $@Model.Price</button><br />
+                    </form>
+                    <form asp-controller="User" asp-action="Review" asp-route-movieId="@Model.Id" method="post">
+                        <button type="button" class="btn btn-outline-secondary">REVIEW</button><br />
+                    </form>
+                    <form asp-controller="User" asp-action="Favorite" asp-route-movieId="@Model.Id" method="post">
+                        <button type="button" class="btn btn-outline-secondary">FAVORITE</button><br />
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col">
+            @*1 of 2*@
+            <h3>MOVIE FACTS</h3>
+            <ul class="list-group-trailers">
+                <li>
+                    <i>Release Date</i> <span class="badge badge-pill badge-dark">@Model.ReleaseDate.Value.ToShortDateString()</span>
+                </li>
+                <li>
+                    Run Time <span class="badge badge-pill badge-dark">@Model.RunTime m</span>
+                </li>
+                <li>
+                    Box Office <span class="badge badge-pill badge-dark">$@Model.Revenue</span>
+                </li>
+                <li>
+                    Budget <span class="badge badge-pill badge-dark">$@Model.Budget</span>
+                </li>
+            </ul>
+            <h3>TRAILERS</h3>
+            <ul class="list-group-trailers">
+                @foreach (var trailer in Model.Trailers)
+                {
+                    <li class="list-group-trailers-items">
+                        <a href="@trailer.TrailerUrl">@trailer.Name</a>
+                    </li>
+                }
+            </ul>
+        </div>
+        <div class="col">
+            @*2 of 2*@
+            <h3>CAST</h3>
+            <ul class="list-group-casts">
+                @foreach (var cast in Model.Casts)
+                {
+                <li class="list-group-item">
+                    <img class="rounded-circle" src="@cast.ProfilePath" width="50" />
+                    &nbsp;&nbsp;@cast.Name &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@cast.Character
+                </li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>
